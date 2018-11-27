@@ -1,8 +1,11 @@
 const EventEmitter = require("events");
-const logger = new EventEmitter();
 
-logger.on("logging", args => {
-  console.log("Logging: ", args.data);
-});
+class Logger extends EventEmitter {
+  log(message) {
+    console.log(message);
 
-logger.emit("logging", { data: "message" });
+    this.emit("messageLogged", { id: 1, url: "http://randomurl.com" });
+  }
+}
+
+module.exports = Logger;
