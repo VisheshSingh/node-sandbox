@@ -1,10 +1,8 @@
-// (function(exports, require, module, __filename,__dirname){}) --> MODULE WRAPPER FUNCTION
-console.log(__filename);
-console.log(__dirname);
-var url = "http://mylogger.io/logs";
+const EventEmitter = require("events");
+const logger = new EventEmitter();
 
-function log(mesg) {
-  console.log(mesg);
-}
+logger.on("logging", args => {
+  console.log("Logging: ", args.data);
+});
 
-module.exports = log;
+logger.emit("logging", { data: "message" });
