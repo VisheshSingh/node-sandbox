@@ -1,20 +1,8 @@
-const http = require("http");
+const _ = require('underscore');
 
-const server = http.createServer((req, res) => {
-  if (req.url === "/") {
-    res.write("hello world");
-    res.end();
-  }
+// CORE MODULE
+// FILE OR FOLDER
+// NODE_MODULES
 
-  if (req.url === "/api/comments") {
-    res.write(JSON.stringify([1, 2, 3]));
-    res.end();
-  }
-});
-
-server.on("connection", socket => {
-  console.log("New connection");
-});
-
-server.listen(3000);
-console.log("Listening on port 3000...");
+var result = _.contains([1,2,3],3);
+console.log(result);
