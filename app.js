@@ -1,6 +1,10 @@
-const os = require("os");
+const fs = require("fs");
+// var files = fs.readdirSync("./");
+// console.log(files);
 
-var totalMemory = os.totalmem();
-var freeMemory = os.freemem();
+fs.readdir("./", function(err, data) {
+  if (err) console.log("Error", err);
+  else console.log("Data", data);
+});
 
-console.log(`Total  memory: ${totalMemory} , Free Memory: ${freeMemory}`);
+console.log("hey");
