@@ -42,7 +42,7 @@ app.post("/api/courses", (req, res) => {
 app.put("/api/courses/:id", (req, res) => {
   const course = courses.find(c => c.id === parseInt(req.params.id));
   if (!course)
-    res
+    return res
       .status(404)
       .send("The requested course was not found in our database...");
 
@@ -58,11 +58,23 @@ app.put("/api/courses/:id", (req, res) => {
   res.send(course);
 });
 
+// DELETE REQUEST
+app.delete("/api/courses/:id", (req, res) => {
+  const course = courses.find(c => c.id === parseInt(req.params.id));
+  if (!course)
+    return res.status(404).send("The course with given ID was not found");
+
+  const index = courses.indexOf(course);
+  courses.splice(index, 1);
+
+  res.send(course);
+});
+
 // GET SPECIFIC ID
 app.get("/api/courses/:id", (req, res) => {
   const course = courses.find(c => c.id === parseInt(req.params.id));
   if (!course)
-    res
+    return res
       .status(404)
       .send("The requested course was not found in our database...");
   else res.send(course);
