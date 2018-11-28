@@ -10,6 +10,10 @@
   "author": "Vishesh",
   "license": "MIT",
   "dependencies": {
+    "mongoose": "^5.3.14",
     "underscore": "^1.9.1"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.6"
   }
 }
