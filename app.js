@@ -1,8 +1,12 @@
-const _ = require('underscore');
+const express = require("express");
+const app = express();
 
-// CORE MODULE
-// FILE OR FOLDER
-// NODE_MODULES
+app.get("/", (req, res) => {
+  res.send("Hello world!");
+});
 
-var result = _.contains([1,2,3],3);
-console.log(result);
+app.get("/api/courses", (req, res) => {
+  res.send([1, 2, 3]);
+});
+
+app.listen(3001, () => console.log("listening to port 3001..."));
