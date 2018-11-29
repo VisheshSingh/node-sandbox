@@ -5,6 +5,9 @@ const logger = require("./logger");
 const express = require("express");
 const app = express();
 
+// ENVIRONMENTS
+console.log(`Environment: ${process.env.NODE_ENV}`);
+console.log(`app: ${app.get("env")}`);
 // BUILT-IN MIDDLEWARE
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -12,7 +15,10 @@ app.use(express.static("public"));
 
 // THIRD-PARTY MIDDLEWARE
 app.use(helmet());
-app.use(morgan("tiny"));
+if (app.get("env") === "development") {
+  app.use(morgan("tiny"));
+  console.log("Morgan enabled...");
+}
 
 // CREATE CUSTOM MIDDLEWARE FUNCTION
 app.use(logger);
