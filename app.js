@@ -3,8 +3,10 @@ const logger = require("./logger");
 const express = require("express");
 const app = express();
 
-// MIDDLEWARE
+// BUILT-IN MIDDLEWARE
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 // CREATE CUSTOM MIDDLEWARE FUNCTION
 app.use(logger);
