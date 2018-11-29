@@ -1,5 +1,4 @@
-const startupDebugger = require("debug")("app:startup");
-const dbDebugger = require("debug")("app:db");
+const debug = require("debug")("app:startup");
 const config = require("config");
 const helmet = require("helmet");
 const morgan = require("morgan");
@@ -7,6 +6,10 @@ const Joi = require("joi");
 const logger = require("./logger");
 const express = require("express");
 const app = express();
+
+// TEMPLATEING ENGINE
+app.set("view engine", "pug");
+app.set("views", "./views"); // default
 
 // ENVIRONMENTS
 console.log(`Environment: ${process.env.NODE_ENV}`);
@@ -21,10 +24,8 @@ app.use(express.static("public"));
 app.use(helmet());
 if (app.get("env") === "development") {
   app.use(morgan("tiny"));
-  startupDebugger("Morgan enabled...");
+  debug("Morgan enabled...");
 }
-
-dbDebugger("Connected to database...");
 
 // CONFIGURATION
 console.log(`Application name: ${config.get("name")}`);
@@ -46,7 +47,10 @@ const courses = [
 ];
 
 app.get("/", (req, res) => {
-  res.send("Hello world!");
+  res.render("index", {
+    title: "My express app",
+    message: "Hi, the api is available at 'api/courses'"
+  });
 });
 
 // GET REQUEST
