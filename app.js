@@ -1,9 +1,18 @@
 const Joi = require("joi");
+const logger = require("./logger");
 const express = require("express");
 const app = express();
 
 // MIDDLEWARE
 app.use(express.json());
+
+// CREATE CUSTOM MIDDLEWARE FUNCTION
+app.use(logger);
+
+app.use(function(req, res, next) {
+  console.log("Authenticating...");
+  next();
+});
 
 const courses = [
   { id: 1, name: "Maths" },
